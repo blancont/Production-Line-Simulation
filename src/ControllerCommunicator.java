@@ -4,57 +4,63 @@ public class ControllerCommunicator implements Subject {
 
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	private int assocId;
-	private String type;
-	private String streetAddress;
-	private int zipCode;
-	private Command command;
-	
-	public ControllerCommunicator(int assocId, String type, String streetAddress, int zipCode) {
-		this.assocId = assocId;
-		this.type = type;
-		this.streetAddress = streetAddress;
-		this.zipCode = zipCode;
+	private static ControllerCommunicator communicator;
+
+	private ControllerCommunicator() {
 	}
-	
+
 	public int getAssocId() {
 		return assocId;
 	}
-	
-	@Override
-	public void registerObserver(Observer o) {
-		observers.add(o);
+
+	public void receiveCommand(Command command, Observer handler) {
+		registerObserver(handler);
+		sendToController(command);
+		
+		// this code executes once the controller has responded to our command
+		// for our purposes, this response is hardcoded
+		String responseFilename = Database.getControllerResponseFilename();
+		DrinkResponse response = JSONConverter.parseControllerResponse(responseFilename);
+		notifyObservers(response);
 	}
+
+	private void sendToController(Command command) {
+		/*
+		 * normally there would be code here to make sure the command is sent to the
+		 * correct controller by checking the command's controller_id, but we don't need
+		 * to code explicit interactions with objects outside the system for our
+		 * purposes
+		 */
+	}
+
+	public static ControllerCommunicator getCommunicator() {
+		if (communicator == null) {
+			communicator = new ControllerCommunicator();
+		}
+		return communicator;
+	}
+
+	// SUBJECT METHODS
+	@Override
+	public void registerObserver(Observer o) { observers.add(o); }
 
 	@Override
 	public void removeObserver(Observer o) {
 		int index = observers.indexOf(o);
-		if(index >= 0) {
-			observers.remove(index);
-		}
+		if (index >= 0) { observers.remove(index); }
 	}
 
 	@Override
-	public String notifyObservers(DrinkResponse response) {
-		for(Observer o : observers) {
-			if(response.getOrderId() == o.getOrderId()) {
-				return o.update(response);
+	public void notifyObservers(DrinkResponse response) {
+		ArrayList<Observer> removals = new ArrayList<Observer>();
+		for (Observer o : observers) {
+			if (response.getOrderId() == o.getOrderId()) {
+				o.update(response);
+				removals.add(o);
 			}
 		}
-		return "Order not found";
+		for (Observer o : removals) {
+			removeObserver(o);
+		}
 	}
-
-	public String takeCommand(Command command, OrderHandler handler, String responseFilename) {
-		this.command = command;
-		registerObserver(handler);
-		
-		// wait for machine to return response
-		return takeDrinkResponse(responseFilename);
-	}
-	
-	public String takeDrinkResponse(String filename) {
-		// drink response comes from machine
-		DrinkResponse response = DataReader.parseControllerResponse(filename);
-		return notifyObservers(response);
-	}
-
 }

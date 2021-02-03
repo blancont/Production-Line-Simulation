@@ -25,4 +25,12 @@ public class Order {
 	public String getDrinkName() {
 		return drink;
 	}
+	
+	public int getZip() {
+		return zip;
+	}
+	
+	public boolean hasCondiments() {
+		return this.condiments != null;
+	}
 }

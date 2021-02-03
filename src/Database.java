@@ -9,45 +9,85 @@ import java.util.ArrayList;
  * TODO: add all set methods and populate database in testing class!
  */
 
-public final class Database {
-	private static ArrayList<CoffeeMaker> coffeeMakers;
-	private static File con_responseJSON;
-	private static ArrayList<ControllerCommunicator> controllers;
-	
-	public Database () {
-		controllers = new ArrayList<ControllerCommunicator>();
-		controllers.add(new ControllerCommunicator(1, "Simple", "200 N. Main", 47803));
-		controllers.add(new ControllerCommunicator(2, "Advanced", "200 N. Main", 47803));
-		controllers.add(new ControllerCommunicator(3, "Simple", "3 S. Walnut", 60601));
-	}
+public class Database {
+	private static ArrayList<Controller> controllers = new ArrayList<Controller>();
+	private static ArrayList<CoffeeMaker> coffeeMakers = new ArrayList<CoffeeMaker>();
+	private static String controller_response_filename;
 
-	public static void setCoffeeMakers(ArrayList<String[]> coffeeMakers) {
-		for (String[] info : coffeeMakers) {
-			coffeeMakers.add(new String[] { info[0], info[1], info[2] });
+	public void setControllers(ArrayList<String[]> controllerList) {
+		for (String[] info : controllerList) {
+			Controller controller = new Controller(Integer.parseInt(info[0]),
+					info[1], info[2], info[3]);
+			controllers.add(controller);
 		}
+	}
+	
+	public void setCoffeeMakers(ArrayList<String[]> coffeeMakerList) {
+		for (String[] info : coffeeMakerList) {
+			CoffeeMaker coffeeMaker = new CoffeeMaker(Integer.parseInt(info[0]),
+					Integer.parseInt(info[1]), info[2]);
+			coffeeMakers.add(coffeeMaker);
+		}
+	}
+	
+	public static Controller findController(int zip_code, boolean hasCondiments) {
+		for (Controller controller : controllers) {
+			if (Integer.parseInt(controller.zip_code) == zip_code) {
+				if (hasCondiments) {
+					if (!controller.type.equals("Simple")) {
+						
+						return controller;
+					}
+				} else {					
+					return controller;
+				}
+			}
+		}
+		return null;
+	}
+	
+	// currently only returns first coffee maker with valid id
+	public static CoffeeMaker findCoffeeMaker(int controller_id) {
+		for (CoffeeMaker coffeeMaker : coffeeMakers) {
+			if (coffeeMaker.controller == controller_id) {
+				return coffeeMaker;
+			}
+		}
+		return null;
 	}
 
 	class CoffeeMaker {
-		int machineID;
+		int machineId;
 		int controller;
 		String description;
 
 		public CoffeeMaker(int machineID, int controller, String description) {
-			this.machineID = machineID;
+			this.machineId = machineID;
 			this.controller = controller;
 			this.description = description;
 		}
 	}
-
-	public static void setControllerResponse(File JSON) {
-		con_responseJSON = JSON;
+	
+	class Controller {
+		int controllerId;
+		String type;
+		String street_address;
+		String zip_code;
+		
+		public Controller(int controllerId, String type, String street_address, String zip_code) {
+			this.controllerId = controllerId;
+			this.type = type;
+			this.street_address = street_address;
+			this.zip_code = zip_code;
+		}
 	}
 
-	public static File getControllerResponse() {
-		return con_responseJSON;
+	public void setControllerResponse(String filename) {
+		controller_response_filename = filename;
 	}
 
-	public static ArrayList<ControllerCommunicator> getControllerComms() {
-		return controllers;
+	public static String getControllerResponseFilename() {
+		return controller_response_filename;
 	}
+
 }

@@ -1,24 +1,22 @@
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class DataReader {
+public class JSONConverter {
 	private static JSONParser parser = new JSONParser();
 	
-	public static Command generateCommand(String filename) {
-		Order order = parseOrder(filename);
-		
-		// Any type of concrete command could be used
-		Command command = new SelectByMachineType(order.getOrderID(), order.getDrinkName());
-		command.applyMachineSelection();
-		return command;
-	}
-	
-	
+//	public static Command generateCommand(String filename) {
+//		Order order = parseOrder(filename);
+//		
+//		// Any type of concrete command could be used
+//		Command command = new SelectByMachineType(order.getOrderID(), order.getDrinkName());
+//		command.applyMachineSelection();
+//		return command;
+//	}
 
 	public static Order parseOrder(String orderJSON) {
 		try (FileReader reader = new FileReader(orderJSON)) {
@@ -39,8 +37,8 @@ public class DataReader {
 			return new Order(orderID_int, street, zip_int, drink);
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	public static DrinkResponse parseControllerResponse(String con_responseJSON) {
@@ -62,6 +60,10 @@ public class DataReader {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static File generateAppResponse() {
+		// code to convert user response to a JSON
 	}
 
 }

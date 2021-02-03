@@ -1,11 +1,6 @@
 import java.util.ArrayList;
 
-public class SelectByMachineType implements Command  {
-	private int controller_id;
-	private int coffee_machine_id;
-	private int orderID;
-	private String drinkName;
-	private String requestType;
+public class SelectByMachineType extends Command  {
 	
 	public SelectByMachineType(int orderID, String drinkName) {
 		this.orderID = orderID;

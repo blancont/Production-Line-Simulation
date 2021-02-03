@@ -1,5 +1,5 @@
 
 public interface Observer {
-	String update(DrinkResponse response);
+	void update(DrinkResponse response);
 	int getOrderId();
 }
