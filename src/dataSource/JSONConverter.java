@@ -2,13 +2,18 @@ package dataSource;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import domain.DrinkResponse;
 import domain.Order;
+import domain.condiments.Condiment;
 
 public class JSONConverter {
 	private static JSONParser parser = new JSONParser();
@@ -28,8 +33,22 @@ public class JSONConverter {
 			int zip_int = (int) zip;
 
 			String drink = ((String) order.get("drink"));
+			
+			// check for condiments
+			ArrayList<Condiment> condList = new ArrayList<Condiment>();
+			JSONArray condiments = ((JSONArray) order.get("condiments"));
+			if (condiments != null) {
+				Iterator itr = condiments.iterator();
+				while (itr.hasNext()) {
+					Map pair = (Map) itr.next();
+					String name = ((String) pair.get("name"));
+					long qty = ((long) pair.get("qty"));
+					int qty_int = (int) qty;
+					condList.add(new Condiment(name, qty_int));
+				}
+			}
 
-			return new Order(orderID_int, street, zip_int, drink);
+			return new Order(orderID_int, street, drink, zip_int, condList);
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 			return null;

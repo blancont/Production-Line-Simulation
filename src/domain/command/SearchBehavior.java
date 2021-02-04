@@ -1,4 +1,4 @@
-package domain;
+package domain.command;
 import dataSource.Database.CoffeeMaker;
 
 public interface SearchBehavior {

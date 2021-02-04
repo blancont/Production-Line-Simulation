@@ -1,18 +1,23 @@
 package domain;
 import java.util.ArrayList;
 
+import domain.condiments.Condiment;
+import domain.drinks.Drink;
+
 public class Order {
 	private int orderID;
 	private String street;
 	private int zip;
-	private String drink;
+	private Drink drink;
+	private String drinkName;
 	private ArrayList<Condiment> condiments;
 	
-	public Order(int orderID, String street, int zip, String drink) {
+	public Order(int orderID, String street, String drinkName, int zip, ArrayList<Condiment> condiments) {
 		this.orderID = orderID;
 		this.street = street;
 		this.zip = zip;
-		this.drink = drink;
+		this.condiments = condiments;
+		this.drinkName = drinkName;
 	}
 	
 	public int getOrderID() {
@@ -24,14 +29,38 @@ public class Order {
 	}
 	
 	public String getDrinkName() {
-		return drink;
+		return drinkName;
 	}
 	
 	public int getZip() {
 		return zip;
 	}
 	
+	public ArrayList<Condiment> getCondiments(){
+		return condiments;
+	}
+	
 	public boolean hasCondiments() {
 		return this.condiments != null;
+	}
+	
+	public void setDrink(Drink drink) {
+		this.drink = drink;
+	}
+	
+	public Drink getDrink() {
+		return drink;
+	}
+	
+	public void printOrderContents() {
+		System.out.println("[Order] -- ORDER CONTENTS --");
+		System.out.println("order_id = " + orderID);
+		System.out.println("street = " + street);
+		System.out.println("zip = " + zip);
+		System.out.println("drink = " + drinkName);
+		for (Condiment c : condiments) {
+			System.out.println("Options: " + c.getName() + " with qty " + c.getQty());
+		}
+		System.out.println();
 	}
 }

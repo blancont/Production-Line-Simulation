@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import dataSource.Database;
 import dataSource.JSONConverter;
+import domain.command.Command;
 
 public class ControllerCommunicator implements Subject {
 
@@ -13,6 +14,7 @@ public class ControllerCommunicator implements Subject {
 	}
 
 	public void receiveCommand(Command command, Observer handler) {
+		command.printCommandContents();
 		registerObserver(handler);
 		sendToController(command);
 		

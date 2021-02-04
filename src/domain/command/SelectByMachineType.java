@@ -1,4 +1,4 @@
-package domain;
+package domain.command;
 import dataSource.Database;
 
 public class SelectByMachineType implements SearchBehavior {

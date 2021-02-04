@@ -1,4 +1,4 @@
-package domain;
+package domain.command;
 import dataSource.Database;
 
 public class SelectByAddress implements SearchBehavior {
