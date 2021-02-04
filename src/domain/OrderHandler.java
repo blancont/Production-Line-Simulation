@@ -14,12 +14,12 @@ public class OrderHandler implements Observer {
 	}
 	
 	public void sendOrder() {
-		this.command = generateCommandFromOrder();
+		generateCommandFromOrder();
 		ControllerCommunicator communicator = ControllerCommunicator.getCommunicator();
 		communicator.receiveCommand(command, this);
 	}
 	
-	public Command generateCommandFromOrder() {
+	public void generateCommandFromOrder() {
 		// find controller to send to (by ZIP, then by type)
 		Database.Controller controller = Database.findController(order.getZip(), order.hasCondiments());
 		int controllerId = controller.getControllerId();
@@ -28,7 +28,11 @@ public class OrderHandler implements Observer {
 		int orderId = order.getOrderID();
 		String drinkName = order.getDrinkName();
 		String requestType = controller.getType();
-		return new Command(controllerId, coffeeId, orderId, drinkName, requestType);
+		
+		// at the moment, hardcoded to search by address and does not include options
+		this.command = new Command(controllerId, orderId, drinkName, requestType, null);
+		command.setSearchBehavior(new SelectByAddress(controller));
+		command.setCoffeeMachineId();
 	}
 
 	@Override

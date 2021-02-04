@@ -36,7 +36,6 @@ public class Database {
 			if (Integer.parseInt(controller.zip_code) == zip_code) {
 				if (hasCondiments) {
 					if (!controller.type.equals("Simple")) {
-						
 						return controller;
 					}
 				} else {					
@@ -55,6 +54,19 @@ public class Database {
 			}
 		}
 		return null;
+	}
+	
+	// currently, uses the same strategy as findCoffeeMaker
+	// given database doesn't provide addresses for coffee makers?
+	// at the very least, we have a place for a strategy to go here once the database allows for it
+	public static CoffeeMaker findCoffeeMakerByAddress(Controller controller) {
+		return findCoffeeMaker(controller.getControllerId());
+	}
+	public static CoffeeMaker findCoffeeMakerByMachineType(Controller controller) {
+		return findCoffeeMaker(controller.getControllerId());
+	}
+	public static CoffeeMaker findCoffeeMakerByQueue(Controller controller) {
+		return findCoffeeMaker(controller.getControllerId());
 	}
 
 	public class CoffeeMaker {
@@ -96,5 +108,7 @@ public class Database {
 	public static String getControllerResponseFilename() {
 		return controller_response_filename;
 	}
+
+
 
 }

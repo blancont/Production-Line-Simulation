@@ -1,36 +1,16 @@
 package domain;
-import java.util.ArrayList;
+import dataSource.Database;
 
-public class SelectByMachineType extends Command  {
+public class SelectByMachineType implements SearchBehavior {
 	
-	public SelectByMachineType(int orderID, String drinkName) {
-		this.orderID = orderID;
-		this.drinkName = drinkName;
-		applyMachineSelection();
-	}
-
-	@Override
-	public int getMachineId() {
-		return coffee_machine_id;
-	}
-
-	@Override
-	public void applyMachineSelection() {
-		// machine selection is currently hard coded but could be
-		// updated to view database and select machine and controller
-		// based on machine type
-		this.controller_id = 2;
-		this.coffee_machine_id = 1;
-		this.requestType = "Simple";
+	Database.Controller controller;
+	
+	public SelectByMachineType(Database.Controller controller) {
+		this.controller = controller;
 	}
 	
 	@Override
-	public int getControllerId() {
-		return controller_id;
-	}
-	
-	@Override
-	public int getOrderId() {
-		return orderID;
+	public Database.CoffeeMaker findCoffeeMachine() {
+		return Database.findCoffeeMakerByMachineType(controller);
 	}
 }

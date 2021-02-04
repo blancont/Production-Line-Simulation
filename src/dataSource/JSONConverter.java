@@ -38,9 +38,11 @@ public class JSONConverter {
 
 	public static DrinkResponse parseControllerResponse(String con_responseJSON) {
 		try (FileReader reader = new FileReader(con_responseJSON)) {
+			// set up
 			Object obj = parser.parse(reader);
 			JSONObject jo = (JSONObject) obj;
 			Map command = (Map) jo.get("drinkresponse");
+			
 			int orderID = Math.toIntExact((long) command.get("orderID"));
 			int status = Math.toIntExact((long) command.get("status"));
 			String desc = ((String) command.get("errordesc"));
@@ -53,8 +55,8 @@ public class JSONConverter {
 			}
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public static File generateAppResponse() {

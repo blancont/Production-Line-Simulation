@@ -34,6 +34,8 @@ public class ControllerCommunicator implements Subject {
 		 * correct controller by checking the command's controller_id, but we don't need
 		 * to code explicit interactions with objects outside the system for our
 		 * purposes
+		 * 
+		 * also for Dr. Zhang: should we convert this to a JSON before sending out?
 		 */
 	}
 
