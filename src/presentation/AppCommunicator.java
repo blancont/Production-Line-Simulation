@@ -4,7 +4,6 @@ import domain.*;
 
 public class AppCommunicator {
 
-	Command command;
 	OrderHandler handler;
 	/*
 	 * in practice, perhaps this should be a list of handlers, if the system wishes

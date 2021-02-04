@@ -1,7 +1,5 @@
 package domain;
 import dataSource.Database;
-import dataSource.Database.CoffeeMaker;
-import dataSource.Database.Controller;
 
 public class OrderHandler implements Observer {
 	

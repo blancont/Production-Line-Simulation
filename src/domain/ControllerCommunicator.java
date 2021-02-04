@@ -7,14 +7,9 @@ import dataSource.JSONConverter;
 public class ControllerCommunicator implements Subject {
 
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
-	private int assocId;
 	private static ControllerCommunicator communicator;
 
 	private ControllerCommunicator() {
-	}
-
-	public int getAssocId() {
-		return assocId;
 	}
 
 	public void receiveCommand(Command command, Observer handler) {
