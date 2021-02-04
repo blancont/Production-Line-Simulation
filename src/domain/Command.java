@@ -1,3 +1,4 @@
+package domain;
 
 public class Command {
 	int controller_id;

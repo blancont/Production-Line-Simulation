@@ -1,4 +1,8 @@
+package domain;
 import java.util.ArrayList;
+
+import dataSource.Database;
+import dataSource.JSONConverter;
 
 public class ControllerCommunicator implements Subject {
 

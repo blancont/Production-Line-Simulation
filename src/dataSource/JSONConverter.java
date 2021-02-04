@@ -1,3 +1,4 @@
+package dataSource;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,18 +7,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import domain.DrinkResponse;
+import domain.Order;
+
 public class JSONConverter {
 	private static JSONParser parser = new JSONParser();
 	
-//	public static Command generateCommand(String filename) {
-//		Order order = parseOrder(filename);
-//		
-//		// Any type of concrete command could be used
-//		Command command = new SelectByMachineType(order.getOrderID(), order.getDrinkName());
-//		command.applyMachineSelection();
-//		return command;
-//	}
-
 	public static Order parseOrder(String orderJSON) {
 		try (FileReader reader = new FileReader(orderJSON)) {
 			Object obj = parser.parse(new FileReader(orderJSON));
@@ -64,6 +59,7 @@ public class JSONConverter {
 	
 	public static File generateAppResponse() {
 		// code to convert user response to a JSON
+		return null;
 	}
 
 }

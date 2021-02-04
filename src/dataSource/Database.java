@@ -1,3 +1,4 @@
+package dataSource;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ public class Database {
 		return null;
 	}
 
-	class CoffeeMaker {
+	public class CoffeeMaker {
 		int machineId;
 		int controller;
 		String description;
@@ -66,9 +67,12 @@ public class Database {
 			this.controller = controller;
 			this.description = description;
 		}
+		
+		public int getMachineId() { return machineId; }
+		
 	}
 	
-	class Controller {
+	public class Controller {
 		int controllerId;
 		String type;
 		String street_address;
@@ -80,6 +84,9 @@ public class Database {
 			this.street_address = street_address;
 			this.zip_code = zip_code;
 		}
+		
+		public int getControllerId() { return controllerId; }
+		public String getType() { return type; }
 	}
 
 	public void setControllerResponse(String filename) {

@@ -1,3 +1,7 @@
+package presentation;
+import dataSource.*;
+import domain.*;
+
 public class AppCommunicator {
 
 	Command command;
@@ -8,7 +12,7 @@ public class AppCommunicator {
 	 */
 
 	public UserResponse receiveJSON(String filename) {
-		Order order = getOrderFromJSON(filename);
+		Order order = JSONConverter.parseOrder(filename);
 		this.handler = new OrderHandler(order);
 		handler.sendOrder();
 		/*
@@ -19,10 +23,6 @@ public class AppCommunicator {
 		 */
 		DrinkResponse controllerResponse = handler.getDrinkResponse();
 		return generateAppResponseFrom(controllerResponse, order);
-	}
-
-	public Order getOrderFromJSON(String filename) {
-		return JSONConverter.parseOrder(filename);
 	}
 
 	public UserResponse generateAppResponseFrom(DrinkResponse controllerResponse, Order order) {
@@ -39,14 +39,4 @@ public class AppCommunicator {
 		}
 		return new UserResponse(orderId, coffeeId, status, statusMessage, errorMessage);
 	}
-
-//	public String takeDrinkResponse(DrinkResponse response) {
-//		int status = response.getStatus();
-//		String str = status == 0 ? "Your coffee has been prepared with your desired options."
-//				: "Your coffee order has been cancelled.";
-//
-//		UserResponse userResponse = new UserResponse(response.getOrderId(), command.getMachineId(), status, str,
-//				response.getErrorDesc());
-//		return userResponse.displayResponse();
-//	}
 }

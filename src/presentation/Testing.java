@@ -1,8 +1,12 @@
+package presentation;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+
+import dataSource.Database;
+import domain.UserResponse;
 
 class Testing {
 	
@@ -22,7 +26,6 @@ class Testing {
 		coffeeMakers.add(new String[] {"2", "2", "Manual expresso"});
 		coffeeMakers.add(new String[] {"3", "1", "Programmable"});
 		coffeeMakers.add(new String[] {"3", "2", "Programmable"});
-		
 		
 		db.setCoffeeMakers(coffeeMakers);
 		db.setControllers(controllers);

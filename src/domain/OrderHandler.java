@@ -1,26 +1,7 @@
-//public class OrderHandler implements Observer {
-//	
-//	private Command command;
-//	private ControllerCommunicator controller;
-//	private AppCommunicator appCommunicator;
-//	
-//	public OrderHandler(Command command, ControllerCommunicator controller, AppCommunicator appCommunicator) {
-//		this.command = command;
-//		this.controller = controller;
-//		this.appCommunicator = appCommunicator;
-//	}
-//
-//	@Override
-//	public String update(DrinkResponse response) {
-//		controller.removeObserver(this);
-//		return appCommunicator.takeDrinkResponse(response);
-//	}
-//
-//	@Override
-//	public int getOrderId() {
-//		return command.getOrderId();
-//	}
-//}
+package domain;
+import dataSource.Database;
+import dataSource.Database.CoffeeMaker;
+import dataSource.Database.Controller;
 
 public class OrderHandler implements Observer {
 	
@@ -41,12 +22,12 @@ public class OrderHandler implements Observer {
 	public Command generateCommandFromOrder() {
 		// find controller to send to (by ZIP, then by type)
 		Database.Controller controller = Database.findController(order.getZip(), order.hasCondiments());
-		int controllerId = controller.controllerId;
+		int controllerId = controller.getControllerId();
 		Database.CoffeeMaker coffeeMaker = Database.findCoffeeMaker(controllerId);
-		int coffeeId = coffeeMaker.machineId;
+		int coffeeId = coffeeMaker.getMachineId();
 		int orderId = order.getOrderID();
 		String drinkName = order.getDrinkName();
-		String requestType = controller.type;
+		String requestType = controller.getType();
 		return new Command(controllerId, coffeeId, orderId, drinkName, requestType);
 	}
 

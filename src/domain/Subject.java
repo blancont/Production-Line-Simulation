@@ -1,3 +1,4 @@
+package domain;
 
 public interface Subject {
 	void registerObserver(Observer o);
