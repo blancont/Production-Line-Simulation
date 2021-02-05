@@ -19,9 +19,9 @@ public class UserResponse {
 	public String displayResponse() {
 		String disp = null;
 		if(status == 0) {
-			disp = statusMessage;
+			disp = statusMessage + " at machine " + coffee_machine_id;
 		} else {
-			disp = statusMessage + " " + errorMessage;
+			disp = statusMessage + " " + errorMessage + " at machine " + coffee_machine_id;
 		}
 		System.out.println(disp);
 		return disp;
