@@ -7,14 +7,14 @@ import domain.RecipeInstruction;
 import domain.condiments.Condiment;
 
 public class Command {
-	int controller_id;
-	int coffee_machine_id;
-	int orderID;
-	String drinkName;
-	String requestType;
-	ArrayList<Condiment> options;
-	SearchBehavior behavior;
-	ArrayList<RecipeInstruction> recipe;
+	public int controller_id;
+	public int coffee_machine_id;
+	public int orderID;
+	public String drinkName;
+	public String requestType;
+	public ArrayList<Condiment> options;
+	public SearchBehavior behavior;
+	public ArrayList<RecipeInstruction> recipe;
 
 	public Command(int control_id, int orderID, String drinkName, String requestType, ArrayList<Condiment> options,
 			ArrayList<RecipeInstruction> recipe) {
@@ -53,6 +53,7 @@ public class Command {
 			System.out.print("Recipe: ");
 			ri.printInstruction();
 		}
+		System.out.println();
 	}
 
 }

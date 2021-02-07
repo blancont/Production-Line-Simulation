@@ -52,6 +52,10 @@ public class Order {
 		return drink;
 	}
 	
+	public boolean hasRecipe() {
+		return drink.hasRecipe();
+	}
+	
 	public void printOrderContents() {
 		System.out.println("[Order] -- ORDER CONTENTS --");
 		System.out.println("order_id = " + orderID);

@@ -13,14 +13,15 @@ public class ControllerCommunicator implements Subject {
 	private ControllerCommunicator() {
 	}
 
-	public void receiveCommand(Command command, Observer handler) {
+	public void sendCommand(Command command, Observer handler) {
 		command.printCommandContents();
 		registerObserver(handler);
 		sendToController(command);
-		
+	}
+	
+	public void receiveCommand(String responseFilename) {
 		// this code executes once the controller has responded to our command
 		// for our purposes, this response is hardcoded
-		String responseFilename = Database.getControllerResponseFilename();
 		DrinkResponse response = JSONConverter.parseControllerResponse(responseFilename);
 		notifyObservers(response);
 	}
@@ -31,9 +32,10 @@ public class ControllerCommunicator implements Subject {
 		 * correct controller by checking the command's controller_id, but we don't need
 		 * to code explicit interactions with objects outside the system for our
 		 * purposes
-		 * 
-		 * also for Dr. Zhang: should we convert this to a JSON before sending out?
 		 */
+		
+		// send to Database class to verify correctness
+		Database.setCommandSent(command);
 	}
 
 	public static ControllerCommunicator getCommunicator() {

@@ -1,0 +1,12 @@
+{
+  "order": { "orderID": 6,
+            "address": {
+                  "street": "3 S. Walnut",
+                  "ZIP": 60601
+            },
+            "drink": "Pumpkin Spice",
+            "condiments": [
+                {"name": "Sugar", "qty": 2}
+            ]
+            }
+}

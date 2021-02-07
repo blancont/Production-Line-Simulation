@@ -25,7 +25,7 @@ public class OrderHandler implements Observer {
 		buildDrink();
 		generateCommandFromOrder();
 		ControllerCommunicator communicator = ControllerCommunicator.getCommunicator();
-		communicator.receiveCommand(command, this);
+		communicator.sendCommand(command, this);
 	}
 	
 	public void buildDrink() {
@@ -49,8 +49,9 @@ public class OrderHandler implements Observer {
 		
 	public void generateCommandFromOrder() {
 		// find controller to send to (by ZIP, then by type)
-		Database.Controller controller = Database.findController(order.getZip(), order.hasCondiments());
-		
+		Database.Controller controller = Database.findController(order.getZip(), order.hasCondiments(),
+				order.hasRecipe());
+
 		// defining other attributes
 		int controllerId = controller.getControllerId();
 		int orderId = order.getOrderID();
@@ -82,5 +83,9 @@ public class OrderHandler implements Observer {
 	
 	public int getCoffeeId() {
 		return command.getCoffeeId();
+	}
+	
+	public Order getOrder() {
+		return order;
 	}
 }

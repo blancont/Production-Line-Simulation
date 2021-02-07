@@ -8,6 +8,6 @@ public class Sugar extends CondimentDecorator {
 
 	public Sugar(Drink drink) {
 		this.drink = drink;
-		this.name = "sugar";
+		this.name = "Sugar";
 	}
 }

@@ -10,7 +10,7 @@ public class AppCommunicator {
 	 * to handle more than one order at a time
 	 */
 
-	public UserResponse receiveJSON(String filename) {
+	public void receiveJSON(String filename) {
 		Order order = JSONConverter.parseOrder(filename);
 		this.handler = new OrderHandler(order);
 		handler.sendOrder();
@@ -20,11 +20,11 @@ public class AppCommunicator {
 		 * a response is received. should AppComm be an observer to OrderHandler? will
 		 * ask Dr. Zhang later
 		 */
-		DrinkResponse controllerResponse = handler.getDrinkResponse();
-		return generateAppResponseFrom(controllerResponse, order);
 	}
 
-	public UserResponse generateAppResponseFrom(DrinkResponse controllerResponse, Order order) {
+	public UserResponse generateAppResponse() {
+		DrinkResponse controllerResponse = handler.getDrinkResponse();
+		Order order = handler.getOrder();
 		int orderId = order.getOrderID();
 		int coffeeId = handler.getCoffeeId();
 		int status = controllerResponse.getStatus();

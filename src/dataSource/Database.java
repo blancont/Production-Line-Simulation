@@ -2,6 +2,8 @@ package dataSource;
 import java.io.File;
 import java.util.ArrayList;
 
+import domain.command.Command;
+
 /* The idea here is to fill the database before each test case by calling
  * the set methods. It might be best to fill the database once (using the
  * example instance in the milestone document) then running every test case
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 public class Database {
 	private static ArrayList<Controller> controllers = new ArrayList<Controller>();
 	private static ArrayList<CoffeeMaker> coffeeMakers = new ArrayList<CoffeeMaker>();
-	private static String controller_response_filename;
+	private static Command commandSent;
 
 	public void setControllers(ArrayList<String[]> controllerList) {
 		for (String[] info : controllerList) {
@@ -31,14 +33,18 @@ public class Database {
 		}
 	}
 	
-	public static Controller findController(int zip_code, boolean hasCondiments) {
+	public static Controller findController(int zip_code, boolean hasCondiments, boolean hasRecipe) {
 		for (Controller controller : controllers) {
 			if (Integer.parseInt(controller.zip_code) == zip_code) {
-				if (hasCondiments) {
+				if (hasRecipe) {
+					if (controller.type.equals("Programmable")) {
+						return controller;
+					}
+				} else if (hasCondiments) {
 					if (!controller.type.equals("Simple")) {
 						return controller;
 					}
-				} else {					
+				} else {
 					return controller;
 				}
 			}
@@ -101,14 +107,12 @@ public class Database {
 		public String getType() { return type; }
 	}
 
-	public void setControllerResponse(String filename) {
-		controller_response_filename = filename;
+	public static void setCommandSent(Command command) {
+		commandSent = command;
 	}
-
-	public static String getControllerResponseFilename() {
-		return controller_response_filename;
+	
+	public static Command getCommandSent() {
+		return commandSent;
 	}
-
-
 
 }

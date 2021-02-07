@@ -2,11 +2,11 @@ package domain;
 
 public class UserResponse {
 	
-	private int orderID;
-	private int coffee_machine_id;
-	private int status;
-	private String statusMessage;
-	private String errorMessage;
+	public int orderID;
+	public int coffee_machine_id;
+	public int status;
+	public String statusMessage;
+	public String errorMessage;
 	
 	public UserResponse(int orderID, int coffee_machine_id, int status, String statusMessage, String errorMessage) {
 		this.orderID = orderID;
@@ -25,5 +25,15 @@ public class UserResponse {
 		}
 		System.out.println(disp);
 		return disp;
+	}
+	
+	public void printContents() {
+		System.out.println("[UserResponse] -- USER-RESPONSE CONTENTS --");
+		System.out.println("orderID = " + orderID);
+		System.out.println("coffee_machine_id = " + coffee_machine_id);
+		System.out.println("status = " + status);
+		System.out.println("status-message = " + statusMessage);
+		System.out.println("error-message = " + errorMessage);
+		System.out.println();
 	}
 }

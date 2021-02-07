@@ -7,7 +7,7 @@ import domain.condiments.Condiment;
 
 public abstract class Drink {
 	protected String name;
-	protected ArrayList<RecipeInstruction> recipe;
+	protected ArrayList<RecipeInstruction> recipe = new ArrayList<RecipeInstruction>();
 	protected String description;
 	
 	public ArrayList<Condiment> getOptions(){
@@ -16,5 +16,9 @@ public abstract class Drink {
 	
 	public ArrayList<RecipeInstruction> getRecipe(){
 		return recipe;
+	}
+	
+	public boolean hasRecipe() {
+		return !recipe.isEmpty();
 	}
 }

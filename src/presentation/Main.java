@@ -3,10 +3,15 @@ import dataSource.Database;
 import domain.UserResponse;
 
 public class Main {
+	
+	static Database db;
+	
 	public static void main(String[] args) {
-		new Database();
 		AppCommunicator appComm = new AppCommunicator();
-		UserResponse response = appComm.receiveJSON("single-order.json");
-		response.displayResponse();
+		appComm.receiveJSON(args[0]);
+	}
+	
+	public static void setDatabase(Database database) {
+		db = database;
 	}
 }

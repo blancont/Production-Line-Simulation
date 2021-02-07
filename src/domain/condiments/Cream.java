@@ -8,6 +8,6 @@ public class Cream extends CondimentDecorator {
 
 	public Cream(Drink drink) {
 		this.drink = drink;
-		this.name = "cream";
+		this.name = "Cream";
 	}
 }

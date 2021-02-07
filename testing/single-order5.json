@@ -1,0 +1,12 @@
+{
+  "order": { "orderID": 5,
+            "address": {
+                  "street": "3 S. Walnut",
+                  "ZIP": 60601
+            },
+            "drink": "Regular Latte",
+            "condiments": [
+                {"name": "Hazelnut", "qty": 2}
+            ]
+            }
+}
