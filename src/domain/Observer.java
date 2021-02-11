@@ -1,6 +1,6 @@
 package domain;
 
 public interface Observer {
-	void update(DrinkResponse response);
-	int getOrderId();
+	public void update(DrinkResponse response);
+	public int getOrderId();
 }

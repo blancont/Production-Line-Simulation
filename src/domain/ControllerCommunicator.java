@@ -59,7 +59,7 @@ public class ControllerCommunicator implements Subject {
 	public void notifyObservers(DrinkResponse response) {
 		ArrayList<Observer> removals = new ArrayList<Observer>();
 		for (Observer o : observers) {
-			if (response.getOrderId() == o.getOrderId()) {
+			if (response.orderID == o.getOrderId()) {
 				o.update(response);
 				removals.add(o);
 			}

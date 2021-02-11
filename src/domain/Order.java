@@ -24,24 +24,12 @@ public class Order {
 		return orderID;
 	}
 	
-	public String toString() {
-		return orderID + ", " + street;
-	}
-	
-	public String getDrinkName() {
-		return drinkName;
-	}
-	
 	public int getZip() {
 		return zip;
 	}
 	
-	public ArrayList<Condiment> getCondiments(){
-		return condiments;
-	}
-	
-	public boolean hasCondiments() {
-		return this.condiments != null;
+	public String getDrinkName() {
+		return drinkName;
 	}
 	
 	public void setDrink(Drink drink) {
@@ -50,6 +38,14 @@ public class Order {
 	
 	public Drink getDrink() {
 		return drink;
+	}
+	
+	public ArrayList<Condiment> getCondiments(){
+		return condiments;
+	}
+	
+	public boolean hasCondiments() {
+		return this.condiments != null;
 	}
 	
 	public boolean hasRecipe() {
@@ -63,7 +59,7 @@ public class Order {
 		System.out.println("zip = " + zip);
 		System.out.println("drink = " + drinkName);
 		for (Condiment c : condiments) {
-			System.out.println("Options: " + c.getName() + " with qty " + c.getQty());
+			System.out.println("Options: " + c.name + " with qty " + c.qty);
 		}
 		System.out.println();
 	}

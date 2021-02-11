@@ -28,11 +28,11 @@ public class OrderHandler implements Observer {
 		communicator.sendCommand(command, this);
 	}
 	
-	public void buildDrink() {
+	private void buildDrink() {
 		Drink drink = factory.makeDrink(order.getDrinkName());
 		ArrayList<Condiment> condiments = order.getCondiments();
 		for (Condiment condiment : condiments) {
-			String condName = condiment.getName();
+			String condName = condiment.name;
 			switch (condName) {
 			case "Sugar":
 				drink = new Sugar(drink);
@@ -47,7 +47,7 @@ public class OrderHandler implements Observer {
 		order.setDrink(drink);
 	}
 		
-	public void generateCommandFromOrder() {
+	private void generateCommandFromOrder() {
 		// find controller to send to (by ZIP, then by type)
 		Database.Controller controller = Database.findController(order.getZip(), order.hasCondiments(),
 				order.hasRecipe());

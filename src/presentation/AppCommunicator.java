@@ -27,9 +27,9 @@ public class AppCommunicator {
 		Order order = handler.getOrder();
 		int orderId = order.getOrderID();
 		int coffeeId = handler.getCoffeeId();
-		int status = controllerResponse.getStatus();
+		int status = controllerResponse.status;
 		String statusMessage = "Your coffee has been prepared with your desired options.";
-		String errorMessage = controllerResponse.getErrorDesc();
+		String errorMessage = controllerResponse.errordesc;
 		
 		// if unsuccessful
 		if (status == 1) {

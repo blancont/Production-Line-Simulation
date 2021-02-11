@@ -42,7 +42,7 @@ class Testing {
 	void testBasicOrder() {
 		setUpDatabase();
 		AppCommunicator appComm = new AppCommunicator();
-		appComm.receiveJSON("single-order2.json");
+		appComm.receiveJSON("testing/single-order2.json");
 		
 		// VERIFY COMMAND
 		Command command = Database.getCommandSent();
@@ -52,7 +52,7 @@ class Testing {
 		
 		// respond to command
 		ControllerCommunicator controlComm = ControllerCommunicator.getCommunicator();
-		controlComm.receiveCommand("single-con-response2.json");
+		controlComm.receiveCommand("testing/single-con-response2.json");
 		UserResponse response = appComm.generateAppResponse();
 		
 		// VERIFY USER RESPONSE
@@ -81,7 +81,7 @@ class Testing {
 		setUpDatabase();
 		AppCommunicator appComm = new AppCommunicator();
 		// send command
-		appComm.receiveJSON("single-order.json");
+		appComm.receiveJSON("testing/single-order.json");
 
 		// VERIFY COMMAND
 		Command command = Database.getCommandSent();
@@ -90,12 +90,12 @@ class Testing {
 		assertNotEquals("Simple", command.requestType);
 		int condsToVerify = 2;
 		for (Condiment c : command.options) {
-			switch (c.getName()) {
+			switch (c.name) {
 			case "Sugar":
-				if (c.getQty() == 1)
+				if (c.qty == 1)
 					condsToVerify--;
 			case "Cream":
-				if (c.getQty() == 2)
+				if (c.qty == 2)
 					condsToVerify--;
 			}
 		}
@@ -103,7 +103,7 @@ class Testing {
 
 		// respond to command
 		ControllerCommunicator controlComm = ControllerCommunicator.getCommunicator();
-		controlComm.receiveCommand("single-con-response.json");
+		controlComm.receiveCommand("testing/single-con-response.json");
 		UserResponse response = appComm.generateAppResponse();
 
 		// VERIFY USER RESPONSE
@@ -118,7 +118,7 @@ class Testing {
 	void testOptions2() {
 		setUpDatabase();
 		AppCommunicator appComm = new AppCommunicator();
-		appComm.receiveJSON("single-order3.json");
+		appComm.receiveJSON("testing/single-order3.json");
 		
 		// VERIFY COMMAND
 		Command command = Database.getCommandSent();
@@ -127,9 +127,9 @@ class Testing {
 		assertNotEquals("Simple", command.requestType);
 		int condsToVerify = 1;
 		for (Condiment c : command.options) {
-			switch (c.getName()) {
+			switch (c.name) {
 			case "Cream":
-				if (c.getQty() == 1)
+				if (c.qty == 1)
 					condsToVerify--;
 			}
 		}
@@ -137,7 +137,7 @@ class Testing {
 		
 		// respond to command
 		ControllerCommunicator controlComm = ControllerCommunicator.getCommunicator();
-		controlComm.receiveCommand("single-con-response3.json");
+		controlComm.receiveCommand("testing/single-con-response3.json");
 		UserResponse response = appComm.generateAppResponse();
 		
 		// VERIFY USER RESPONSE
@@ -162,9 +162,9 @@ class Testing {
 		// verify condiments
 		int condsToVerify = 1;
 		for (Condiment c : command.options) {
-			switch (c.getName()) {
+			switch (c.name) {
 			case "Hazelnut":
-				if (c.getQty() == 2)
+				if (c.qty == 2)
 					condsToVerify--;
 			}
 		}
@@ -205,9 +205,9 @@ class Testing {
 		// verify condiments
 		int condsToVerify = 1;
 		for (Condiment c : command.options) {
-			switch (c.getName()) {
+			switch (c.name) {
 			case "Hazelnut":
-				if (c.getQty() == 2)
+				if (c.qty == 2)
 					condsToVerify--;
 			}
 		}
@@ -245,9 +245,9 @@ class Testing {
 		// verify condiments
 		int condsToVerify = 1;
 		for (Condiment c : command.options) {
-			switch (c.getName()) {
+			switch (c.name) {
 			case "Sugar":
-				if (c.getQty() == 2)
+				if (c.qty == 2)
 					condsToVerify--;
 			}
 		}

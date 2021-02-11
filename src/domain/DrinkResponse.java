@@ -2,10 +2,10 @@ package domain;
 
 public class DrinkResponse {
 	
-	private int orderID;
-	private int status;
-	private String errordesc;
-	private int errorcode;
+	public int orderID;
+	public int status;
+	public String errordesc;
+	public int errorcode;
 
 	public DrinkResponse(int orderID, int status, String errordesc, int errorcode) {
 		this.orderID = orderID;
@@ -14,15 +14,4 @@ public class DrinkResponse {
 		this.errorcode = errorcode;
 	}
 	
-	public int getOrderId() {
-		return orderID;
-	}
-	
-	public int getStatus() {
-		return status;
-	}
-
-	public String getErrorDesc() {
-		return errordesc;
-	}
 }

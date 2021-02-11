@@ -47,7 +47,7 @@ public class Command {
 		System.out.println("DrinkName = " + drinkName);
 		System.out.println("RequestType = " + requestType);
 		for (Condiment c : options) {
-			System.out.println("Options: " + c.getName() + " with qty " + c.getQty());
+			System.out.println("Options: " + c.name + " with qty " + c.qty);
 		}
 		for (RecipeInstruction ri : recipe) {
 			System.out.print("Recipe: ");
