@@ -8,11 +8,12 @@ import domain.drinks.Drink;
 public abstract class CondimentDecorator extends Drink {
 
 	protected Drink drink;
+	long qty;
 	
 	@Override
 	public ArrayList<Condiment> getOptions() {
 		ArrayList<Condiment> condiments = drink.getOptions();
-		condiments.add(new Condiment(name, 1));
+		condiments.add(new Condiment(name, qty));
 		return condiments;
 	}
 	

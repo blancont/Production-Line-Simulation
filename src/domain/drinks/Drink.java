@@ -21,4 +21,6 @@ public abstract class Drink {
 	public boolean hasRecipe() {
 		return !recipe.isEmpty();
 	}
+	
+	
 }

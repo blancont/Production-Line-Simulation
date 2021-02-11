@@ -4,9 +4,10 @@ import domain.drinks.Drink;
 
 public class Nutrasweet extends CondimentDecorator {
 
-	public Nutrasweet(Drink drink) {
+	public Nutrasweet(Drink drink, long qty) {
 		this.drink = drink;
-		this.name = "nutrasweet";
+		this.name = "Nutrasweet";
+		this.qty = qty;
 	}
 
 }

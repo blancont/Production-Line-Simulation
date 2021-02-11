@@ -272,5 +272,50 @@ class Testing {
 		}
 		assertEquals(0, stepsToVerify);
 	}
+	
+	@Test
+	void testFactory() {
+		setUpDatabase();
+		AppCommunicator appComm = new AppCommunicator();
+		appComm.receiveJSON("testing/single-order7.json");
+		
+		Command command = Database.getCommandSent();
+		assertEquals(7, command.orderID);
+		assertEquals("Pumpkin Spice", command.drinkName);
+		assertEquals("Programmable", command.requestType);
+		
+		// verify condiments
+		int condsToVerify = 2;
+		for (Condiment c : command.options) {
+			switch (c.name) {
+			case "Nutrasweet":
+				if (c.qty == 1)
+					condsToVerify--;
+			case "Cream":
+				if (c.qty == 2)
+					condsToVerify--;
+			}
+		}
+		assertEquals(0, condsToVerify);
+		
+		// verify recipe
+		int stepsToVerify = 4;
+		for (RecipeInstruction ri : command.recipe) {
+			switch (ri.getCommandStep()) {
+			case "add":
+				if (ri.getObject().equals("coffee"))
+					stepsToVerify--;
+				if (ri.getObject().equals("pumpkin spice"))
+					stepsToVerify--;
+			case "mix":
+				if (ri.getObject().equals(""))
+					stepsToVerify--;
+			case "top":
+				if (ri.getObject().equals("nutmeg"))
+					stepsToVerify--;
+			}
+		}
+		assertEquals(0, stepsToVerify);
+	}
 
 }

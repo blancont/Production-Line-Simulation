@@ -6,8 +6,9 @@ import domain.drinks.Drink;
 
 public class Sugar extends CondimentDecorator {
 
-	public Sugar(Drink drink) {
+	public Sugar(Drink drink, long qty) {
 		this.drink = drink;
 		this.name = "Sugar";
+		this.qty = qty;
 	}
 }

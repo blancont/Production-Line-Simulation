@@ -35,13 +35,17 @@ public class OrderHandler implements Observer {
 			String condName = condiment.name;
 			switch (condName) {
 			case "Sugar":
-				drink = new Sugar(drink);
+				drink = new Sugar(drink, condiment.qty);
+				break;
 			case "Nutrasweet":
-				drink = new Nutrasweet(drink);
+				drink = new Nutrasweet(drink, condiment.qty);
+				break;
 			case "Hazelnut":
-				drink = new Hazelnut(drink);
+				drink = new Hazelnut(drink, condiment.qty);
+				break;
 			case "Cream":
-				drink = new Cream(drink);
+				drink = new Cream(drink, condiment.qty);
+				break;
 			}
 		}
 		order.setDrink(drink);
@@ -58,7 +62,7 @@ public class OrderHandler implements Observer {
 		String drinkName = order.getDrinkName();
 		String requestType = controller.getType();
 		Drink drink = order.getDrink();
-		ArrayList<Condiment> condiments = order.getCondiments();
+		ArrayList<Condiment> condiments = drink.getOptions();
 		ArrayList<RecipeInstruction> recipe = drink.getRecipe();
 		
 		// at the moment, hardcoded to search by address and does not include options
