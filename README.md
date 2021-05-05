@@ -14,11 +14,21 @@ An average scenario is as follows:
 - The platform waits for a response (success / fail) from the controller
 - The platform sends the received status back to the app
 
-
-
-
-
 The goal is to develop a proof-of-concept design that can be easily extended as more demands are made of the management platform (e.g. new types of coffee orders).
+
+### Requirements
+
+By the end of development, the design needed to support the following use cases:
+- UC1: User orders a coffee with no condiments
+- UC2: User orders a coffee with condiments (e.g. Cream, Sugar, Hazelnut)
+- UC3: User orders a coffee that requires a recipe (e.g. the system must send a three-step recipe to a controller when a Latte is ordered)
+
+Since this project was built for a course, no actual interactions with an application, database, or controller was required. As a result, some outcomes are hardcoded (see testBasicOrder() in the Testing class for an example).
+
+## Design
+
+## Project Status
+This project was completed in February 2021 and is no longer being developed. More recent commits serve to organize files and add documentation.
 
 ## Authors
 This project was built in collaboration with Arudrra Krishnan and Nick Hall.
