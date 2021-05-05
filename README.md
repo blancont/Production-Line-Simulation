@@ -23,7 +23,7 @@ By the end of development, the design needed to support the following use cases:
 - UC2: User orders a coffee with condiments (e.g. Cream, Sugar, Hazelnut)
 - UC3: User orders a coffee that requires a recipe (e.g. the system must send a three-step recipe to a controller when a Latte is ordered)
 
-Since this project was built for a course, no actual interactions with an application, database, or controller was required. As a result, some outcomes are hardcoded (see testBasicOrder() in the Testing class for an example).
+Since this project was built for a course, no actual interactions with an application, database, or controller were required. As a result, some outcomes are hardcoded (see testBasicOrder() in the Testing class for an example).
 
 ## Design
 
